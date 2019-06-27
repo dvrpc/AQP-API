@@ -1,0 +1,18 @@
+{
+  "name": "aqp-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "csv-parser": "^2.3.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "sqlite3": "^4.0.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node -r esm index.js"
+  },
+  "author": "Jesse Strangfeld <jstrangfeld@dvrpc.org>",
+  "license": "CC0-1.0"
+}
