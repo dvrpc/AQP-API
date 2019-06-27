@@ -12,26 +12,22 @@ const getIndex = aqi => {
   return "good";
 };
 
-app.get("/", (req, res) =>
-  query(forecasts => {
-    console.log(forecasts);
-    res.contentType = "application/json";
-    res.send(
-      JSON.stringify(
-        forecasts.map(forecast => {
-          const [month, day, year] = forecast.date.split("/");
-          return {
-            date: `20${year}-${month}-${day}T00:00:00-04:00`,
-            index: getIndex(forecast.aqi),
-            forecast: ""
-          };
-        })
-      )
-    );
-  })
+app.get("/aqp/", (req, res) =>
+  query(forecasts =>
+    res.json(
+      forecasts.map(forecast => {
+        const [month, day, year] = forecast.date.split("/");
+        return {
+          date: `20${year}-${month}-${day}T00:00:00-04:00`,
+          index: getIndex(forecast.aqi),
+          forecast: ""
+        };
+      })
+    )
+  )
 );
 
-app.get("/cron", (req, res) => {
+app.get("/aqp/cron", (req, res) => {
   try {
     populate();
   } catch (e) {
