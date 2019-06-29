@@ -20,7 +20,7 @@ app.get("/aqp/", (req, res) =>
         return {
           date: `20${year}-${month}-${day}T00:00:00-04:00`,
           index: getIndex(forecast.aqi),
-          forecast: ""
+          forecast: forecast.forecast
         };
       })
     )

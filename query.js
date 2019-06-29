@@ -9,7 +9,6 @@ const query = callback => {
     date.customFormat(),
     date.addDays(1).customFormat()
   ];
-  console.log(date.getTimezoneOffset());
   return db.all(
     "SELECT * FROM FORECASTS WHERE date IN (?,?,?)",
     dates,
