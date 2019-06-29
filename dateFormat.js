@@ -2,6 +2,10 @@ Date.prototype.addDays = function(days) {
   return new Date(this.valueOf() + days * 864e5);
 };
 
+Date.prototype.addHours = function(hours) {
+  return new Date(this.valueOf() + hours * 36e5);
+};
+
 Date.prototype.customFormat = function() {
   return this.toLocaleDateString()
     .split("/")

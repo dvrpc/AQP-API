@@ -3,12 +3,13 @@ import "./dateFormat";
 
 const query = callback => {
   const db = new sqlite3.Database("data.db");
-  const date = new Date();
+  const date = new Date().addHours(-4); //UTC on DO so subtract 4 hours for EST
   const dates = [
     date.addDays(-1).customFormat(),
     date.customFormat(),
     date.addDays(1).customFormat()
   ];
+  console.log(date.getTimezoneOffset());
   return db.all(
     "SELECT * FROM FORECASTS WHERE date IN (?,?,?)",
     dates,
