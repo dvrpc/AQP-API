@@ -7,7 +7,7 @@
     "csv-parser": "^2.3.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "sqlite3": "^4.0.9"
+    "pg": "^7.11.0"
   },
   "devDependencies": {},
   "scripts": {
