@@ -1,18 +1,17 @@
-import sqlite3 from "sqlite3";
+import db from "./db";
 import "./dateFormat";
 
 const query = callback => {
-  const db = new sqlite3.Database("data.db");
   const date = new Date().addHours(-4); //UTC on DO so subtract 4 hours for EST
   const dates = [
     date.addDays(-1).customFormat(),
     date.customFormat(),
     date.addDays(1).customFormat()
   ];
-  return db.all(
-    "SELECT * FROM FORECASTS WHERE date IN (?,?,?)",
+  return db.query(
+    "SELECT * FROM FORECASTS WHERE date IN ($1,$2,$3)",
     dates,
-    (err, rows) => callback(rows)
+    (err, res) => res && callback(res.rows)
   );
 };
 export default query;
