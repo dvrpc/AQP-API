@@ -22,7 +22,7 @@ app.get("/aqp/", (req, res) =>
           index: getIndex(forecast.aqi),
           forecast: forecast.forecast
         };
-      })
+      }).sort((a, b) => (a.date > b.date ? 1 : -1))
     )
   )
 );

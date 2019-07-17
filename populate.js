@@ -3,8 +3,16 @@ import https from "https";
 import db from "./db";
 import "./dateFormat";
 
-const filterByDate = (date, results) =>
-  results.filter(result => result[1] === date);
+const filterByDate = (date, results) => {
+  const todayColl = results.filter(result => result[1] === date && result[6] === "Y");
+  if (!todayColl.length) {
+    return null;
+  }
+  if (todayColl.length === 1) {
+    return todayColl[0]
+  }
+  return todayColl.sort((a,b) => (a[5] < b[5] ? 1 : -1))[0];
+}
 
 const populate = () => {
   const date = new Date().addHours(-4);
@@ -29,15 +37,13 @@ const populate = () => {
               const current = filterByDate(date, results);
               return [
                 date,
-                Math.max(...[0,...current.map(result => result[12])]),
-                current
-                  .map(result => result[15])
-                  .sort((a, b) => a.length > b.length)[0]
+                current[12],
+                current[15]
               ];
             })
             .forEach(vals =>
               db.query(
-                "INSERT INTO forecasts (date, aqi, forecast) VALUES ($1,$2,$3)",
+                "INSERT INTO forecasts (date, aqi, forecast) VALUES ($1,$2,$3) ON CONFLICT (date) DO UPDATE SET aqi = $2, forecast = $3 ",
                 vals
               )
             );
