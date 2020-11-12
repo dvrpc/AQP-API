@@ -18,9 +18,10 @@ app.get("/aqp/", (req, res) =>
       forecasts.map(forecast => {
         const [month, day, year] = forecast.date.split("/");
         return {
-          date: `20${year}-${month}-${day}T00:00:00-04:00`,
+          date: `20${year}-${month}-${day}T00:00:00-05:00`,
           index: getIndex(forecast.aqi),
-          forecast: forecast.forecast
+          forecast: forecast.forecast,
+          updated: forecast.updated
         };
       }).sort((a, b) => (a.date > b.date ? 1 : -1))
     )

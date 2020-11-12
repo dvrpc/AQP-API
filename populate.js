@@ -15,7 +15,7 @@ const filterByDate = (date, results) => {
 }
 
 const populate = () => {
-  const date = new Date().addHours(-4);
+  const date = new Date().addHours(-5);
   const results = [];
   const dates = [
     date.addDays(-1).customFormat(),
@@ -43,7 +43,7 @@ const populate = () => {
             })
             .forEach(vals =>
               db.query(
-                "INSERT INTO forecasts (date, aqi, forecast) VALUES ($1,$2,$3) ON CONFLICT (date) DO UPDATE SET aqi = $2, forecast = $3 ",
+                "INSERT INTO forecasts (date, aqi, forecast) VALUES ($1,$2,$3) ON CONFLICT (date) DO UPDATE SET aqi = $2, forecast = $3, updated = CURRENT_TIMESTAMP",
                 vals
               )
             );

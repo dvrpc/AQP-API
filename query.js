@@ -2,7 +2,7 @@ import db from "./db";
 import "./dateFormat";
 
 const query = callback => {
-  const date = new Date().addHours(-4); //UTC on DO so subtract 4 hours for EST
+  const date = new Date().addHours(-5); //UTC on DO so subtract 4 hours for EST
   const dates = [
     date.addDays(-1).customFormat(),
     date.customFormat(),
