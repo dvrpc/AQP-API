@@ -1,6 +1,7 @@
 import express from "express";
 import query from "./query";
 import populate from "./populate";
+import "dotenv/config";
 
 const app = express();
 const port = process.env.PORT || 3000;

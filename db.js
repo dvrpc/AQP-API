@@ -1,10 +1,10 @@
 import pg from "pg";
 
 const db = new pg.Pool({
-  user: "postgres",
-  host: "127.0.0.1",
-  database: "aqp",
-  password: "postgres",
+  user: process.env.db_user || "postgres",
+  host: process.env.db_host || "127.0.0.1",
+  database: process.env.db_name || "aqp",
+  password: process.env.db_user_pass || "postgres",
   port: 5432,
 });
 
