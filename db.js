@@ -1,4 +1,5 @@
 import pg from "pg";
+import "dotenv/config";
 
 const db = new pg.Pool({
   user: process.env.db_user || "postgres",
