@@ -3,9 +3,6 @@ import query from "./query";
 import populate from "./populate";
 import "dotenv/config";
 
-const app = express();
-const port = process.env.PORT || 3000;
-
 const getIndex = (aqi) => {
   if (aqi > 150) return "unhealthy";
   if (aqi > 100) return "sensitive";
@@ -13,9 +10,16 @@ const getIndex = (aqi) => {
   return "good";
 };
 
+const app = express();
+const port = process.env.PORT || 3000;
+const router = express.Router();
+app.use("/api/aqp-data", router);
+
+app.use(express.json());
+// error handling middleware
 app.use((err, req, res, next) => res.status(500).json({ message: err }));
 
-app.get("/aqp/", (req, res) => {
+router.get("/aqp/", (req, res) => {
   try {
     query((forecasts) =>
       res.json(
@@ -37,7 +41,7 @@ app.get("/aqp/", (req, res) => {
   }
 });
 
-app.get("/aqp/cron", (req, res) => {
+router.get("/aqp/cron", (req, res) => {
   try {
     populate();
   } catch (e) {
