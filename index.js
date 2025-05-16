@@ -13,13 +13,13 @@ const getIndex = (aqi) => {
 const app = express();
 const port = process.env.PORT || 3000;
 const router = express.Router();
-app.use("/api/aqp-data", router);
+app.use("/api/aqp", router);
 
 app.use(express.json());
 // error handling middleware
 app.use((err, req, res, next) => res.status(500).json({ message: err }));
 
-router.get("/aqp/", (req, res) => {
+router.get("/latest/", (req, res) => {
   try {
     query((forecasts) =>
       res.json(
@@ -41,7 +41,7 @@ router.get("/aqp/", (req, res) => {
   }
 });
 
-router.get("/aqp/cron", (req, res) => {
+router.get("/cron", (req, res) => {
   try {
     populate();
   } catch (e) {
