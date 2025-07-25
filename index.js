@@ -19,7 +19,7 @@ app.use(express.json());
 // error handling middleware
 app.use((err, req, res, next) => res.status(500).json({ message: err }));
 
-router.get("/latest/", (req, res) => {
+router.get("/latest/", (req, res, next) => {
   try {
     query((forecasts) =>
       res.json(
@@ -33,21 +33,21 @@ router.get("/latest/", (req, res) => {
               updated: forecast.updated,
             };
           })
-          .sort((a, b) => (a.date > b.date ? 1 : -1))
-      )
+          .sort((a, b) => (a.date > b.date ? 1 : -1)),
+      ),
     );
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/cron", (req, res) => {
+router.get("/cron", (req, res, next) => {
   try {
     populate();
-  } catch (e) {
-    next(e);
+    res.sendStatus(200);
+  } catch (error) {
+    next(error);
   }
-  res.sendStatus(200);
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
