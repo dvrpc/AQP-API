@@ -11,8 +11,12 @@
     "pg": "^8.3.3"
   },
   "scripts": {
-    "start": "node -r esm index.js"
+    "start": "node -r esm index.js",
+    "dev": "nodemon -r esm index.js"
   },
   "author": "Jesse Strangfeld <jstrangfeld@dvrpc.org>",
-  "license": "CC0-1.0"
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
