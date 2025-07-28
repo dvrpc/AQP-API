@@ -2,6 +2,7 @@ import express from "express";
 import query from "./query";
 import populate from "./populate";
 import "dotenv/config";
+import { initDB } from "./db";
 
 const getIndex = (aqi) => {
   if (aqi > 150) return "unhealthy";
@@ -50,4 +51,7 @@ router.get("/cron", (req, res, next) => {
   }
 });
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+app.listen(port, () => {
+  if (process.env.NODE_ENV !== "production") initDB();
+  console.log(`App listening on port ${port}!`);
+});
