@@ -14,6 +14,13 @@ const getIndex = (aqi) => {
 const app = express();
 const port = process.env.PORT || 3000;
 const router = express.Router();
+
+app.use(
+  cors({
+    origin: "https://airqualitypartnership.org",
+  }),
+);
+
 app.use("/api/aqp", router);
 
 app.use(express.json());
