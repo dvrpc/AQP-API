@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import query from "./query";
 import populate from "./populate";
