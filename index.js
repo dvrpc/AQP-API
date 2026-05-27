@@ -18,7 +18,7 @@ const router = express.Router();
 
 app.use(
   cors({
-    origin: ["https://airqualitypartnership.org", "http://aqp.local"],
+    origin: ["https://airqualitypartnership.org", "http://aqp.local", "https://aqp.local"],
   }),
 );
 
